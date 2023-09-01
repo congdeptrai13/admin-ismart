@@ -36,7 +36,16 @@ Route::middleware('auth')->group(function () {
     Route::get("admin/user/action", [AdminUserController::class, "action"]);
     Route::get("admin/user/edit/{id}", [AdminUserController::class, "edit"])->name("user.edit");
     Route::post("admin/user/update/{id}", [AdminUserController::class, "update"])->name("user.update");
-    Route::get("admin/page/list", [AdminPageController::class, "list"]);
+    Route::get("admin/page/list", [AdminPageController::class, "list"])->name("page.list");
+    Route::get("admin/page/add", [AdminPageController::class, "add"]);
+    Route::group(['prefix' => 'laravel-filemanager'], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
+    Route::post("admin/page/store", [AdminPageController::class, "store"])->name("page.store");
+    Route::get("admin/page/delete/{id}", [AdminPageController::class, "delete"])->name("page.delete");
+    Route::get("admin/page/edit/{id}", [AdminPageController::class, "edit"])->name("page.edit");
+    Route::post("admin/page/update/{id}", [AdminPageController::class, "update"])->name("page.update");
+    Route::get("admin/page/action", [AdminPageController::class, "action"]);
 });
 
 
